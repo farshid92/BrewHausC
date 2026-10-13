@@ -1,12 +1,17 @@
-import { useState } from 'react'
-
+import { Header } from './components/Header'
+import { Hero } from './components/Hero'
+import { Shop } from './components/Shop'
+import {About} from './components/About'
+import {Footer} from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div>
-      <h1 className="text-4xl font-bold text-ember">BrewHaus</h1>
+      <Header />
+      <Hero />
+      <Shop />
+      <About />
+      <Footer />
     </div>
   )
 }
