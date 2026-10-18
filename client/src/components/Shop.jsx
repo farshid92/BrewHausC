@@ -1,14 +1,29 @@
-import { useState } from 'react'
-import { products } from '../data/products'
+import { useState, useEffect } from 'react'
 import { ProductCard } from './ProductCard'
 const categories = ['All', 'Beans', 'Equipment']
 export function Shop() {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('All')
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await fetch('/api/products')
+        const data = await response.json()
+        setProducts(data)
+      } catch (err) {
+        console.error('Failed to load products', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadProducts()
+  }, [])
   const filtered =
     filter === 'All' ? products : products.filter((p) => p.category === filter)
   return (
-    <section id="shop" className="mx-auto max-w-[1100px] scroll-mt-16 px-4 py-12 sm:px-6">
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+    <section id="shop" className="mx-auto max-w-[1100px] px-6 py-12">
+      <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-bold">This week's picks</h2>
         <div className="flex gap-2">
           {categories.map((cat) => (
@@ -26,11 +41,15 @@ export function Shop() {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {filtered.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {loading ? (
+        <p className="text-ink-soft">Loading products...</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {filtered.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
