@@ -77,3 +77,26 @@ text-white transition disabled:cursor-not-allowed disabled:opacity-50"
     </div>
   )
 }
+function Field({ label, name, hint, ...inputProps }) {
+  const hintId = hint ? `${name}-hint` : undefined
+  return (
+    <div>
+      <label htmlFor={name} className="block text-sm font-medium">
+        {label}
+      </label>
+      <input
+        id={name}
+        name={name}
+        aria-describedby={hintId}
+        className="mt-1 w-full rounded-lg border border-ink-soft/30 bg-white px-3 py-2
+outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/20"
+        {...inputProps}
+      />
+      {hint && (
+        <p id={hintId} className="mt-1 text-xs text-ink-soft">
+          {hint}
+        </p>
+      )}
+    </div>
+  )
+}
