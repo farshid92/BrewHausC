@@ -5,6 +5,8 @@ import { Shop } from './components/Shop'
 import { About } from './components/About'
 import { Footer } from './components/Footer'
 import { Login } from './components/Login'
+import { ProductDetail } from './components/ProductDetail'
+
 function Home() {
   return (
     <>
@@ -22,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login mode="signin" />} />
         <Route path="/signup" element={<Login mode="signup" />} />
+        <Route path="/products/:slug" element={<ProductDetail />} />
       </Routes>
       <Footer />
     </BrowserRouter>
