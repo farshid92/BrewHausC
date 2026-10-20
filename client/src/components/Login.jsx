@@ -88,7 +88,7 @@ function Field({ label, name, hint, ...inputProps }) {
         id={name}
         name={name}
         aria-describedby={hintId}
-        className="mt-1 w-full rounded-lg border border-ink-soft/30 bg-white px-3 py-2
+        className="mt-1 w-full rounded-lg border border-line bg-white px-3 py-2
 outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/20"
         {...inputProps}
       />
